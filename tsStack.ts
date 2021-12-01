@@ -13,10 +13,16 @@ class StackImpl implements IStack {
     private _size: number = 0;
     private head?: StackNode;
 
+    constructor(private capacity: number = 4) {}
+
     get size() {
         return this._size;
     }
     push(value: string) {
+        if (this.size === this.capacity) {
+            throw new Error('Stack is full!');
+        };
+
         const node:StackNode = {
             value,
             next: this.head
@@ -40,6 +46,8 @@ const makeStack = new StackImpl();
 makeStack.push('1');
 makeStack.push('2');
 makeStack.push('3');
+makeStack.push('4');
+makeStack.push('5');
 
 while(makeStack.size !== 0) {
     const value = makeStack.pop();
